@@ -50,13 +50,6 @@ flowchart TD
     I --> J[Save final model]
 ```
 
-## 📊 Data & Model Details
-
-**Dataset**: Pakistan COVID-19 case reports, March-June 2020, reported per region per day. Aggregated to 90 national daily rows, then reduced to 83 rows once lag and rolling-window features have enough history.
-
-**Features**: calendar position (day of week, days since start), lagged new-case counts (1, 2, 3, 7 days), 3-day and 7-day rolling mean/std of new cases, lagged testing volume, lagged growth rate, lagged test positivity rate — 12 features total, all using information available no later than the previous day.
-
-
 ## ⚠️ Leakage Check: Shuffled vs. Chronological Split
 
 | Split          | MAE      | RMSE     | R²        |
@@ -65,6 +58,14 @@ flowchart TD
 | Chronological (honest) | 3,795.96 | 4,425.53 | **0.629** |
 
 A random split lets the model peek at chronologically-later data during training. The chronological result above is the real one, and the one used everywhere else in this README.
+
+
+
+## 📊 Data & Model Details
+
+**Dataset**: Pakistan COVID-19 case reports, March-June 2020, reported per region per day. Aggregated to 90 national daily rows, then reduced to 83 rows once lag and rolling-window features have enough history.
+
+**Features**: calendar position (day of week, days since start), lagged new-case counts (1, 2, 3, 7 days), 3-day and 7-day rolling mean/std of new cases, lagged testing volume, lagged growth rate, lagged test positivity rate — 12 features total, all using information available no later than the previous day.
 
 
 | Model | MAE | RMSE | R² |
