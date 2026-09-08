@@ -56,6 +56,17 @@ flowchart TD
 
 **Features**: calendar position (day of week, days since start), lagged new-case counts (1, 2, 3, 7 days), 3-day and 7-day rolling mean/std of new cases, lagged testing volume, lagged growth rate, lagged test positivity rate — 12 features total, all using information available no later than the previous day.
 
+
+## ⚠️ Leakage Check: Shuffled vs. Chronological Split
+
+| Split          | MAE      | RMSE     | R²        |
+|----------------|----------|----------|-----------|
+| Shuffled (naive) | 1,050.58 | 1,416.38 | **0.901** |
+| Chronological (honest) | 3,795.96 | 4,425.53 | **0.629** |
+
+A random split lets the model peek at chronologically-later data during training. The chronological result above is the real one, and the one used everywhere else in this README.
+
+
 | Model | MAE | RMSE | R² |
 |---|---|---|---|
 | **Ridge** | **3,795.96** | **4,425.53** | **0.629** |
